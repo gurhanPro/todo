@@ -32,7 +32,15 @@ export default function authReducer(state = initialState, action) {
         return { ...state, registerLoader: false, registerError: action.payload };
 
     case types.LOGOUT_REQUEST:
-        return { ...state };
+        return {
+          loggedinUser: null,
+          loginError: null,
+          loginLoader: false,
+        
+          registeredUser: null,
+          registerError: null,
+          registerLoader: false,
+        };
 
     default:
       return state;
