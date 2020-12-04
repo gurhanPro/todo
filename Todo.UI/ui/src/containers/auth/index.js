@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
+import { connect } from "react-redux";
+
 import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 
 import Login from '../../components/login'
 import Register from '../../components/register'
 
-export default class Auth extends Component {
+export  class Auth extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -36,3 +38,5 @@ export default class Auth extends Component {
         )
     }
 }
+export default connect(state => ({
+}))(Auth);
