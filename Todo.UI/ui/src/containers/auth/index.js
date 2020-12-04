@@ -13,9 +13,20 @@ export  class Auth extends Component {
         super(props)
         this.state = {
             showLogin: false,
-            selectedAuthComponent: 'login'
+						selectedAuthComponent: 'login', 
+						showSuccessRegisterationMessage: false,
         }
-    }
+		}
+		
+		componentDidUpdate(){
+			if(this.props.authData.loggedinUser){
+					this.props.history.push("/todos")
+			}
+
+			if(this.props.authData.registeredUser && !this.state.showSuccessRegisterationMessage){
+				this.registerationSucccess()
+		}
+	}
 
     handleSelectAuthComponent(selectedAuthComponent) {
         this.setState({ selectedAuthComponent })
@@ -30,8 +41,14 @@ export  class Auth extends Component {
 			this.props.dispatch(actions.registerRequest(user))
 		}
 
+		registerationSucccess(){
+			this.setState({ selectedAuthComponent: 'login', showSuccessRegisterationMessage: true})
+		}
+
 
     render() {
+			console.log(this.props.authData);
+
         return (
             <div>
                 <h1>Auth here</h1>
@@ -40,11 +57,11 @@ export  class Auth extends Component {
                     <Button variant={this.state.selectedAuthComponent === 'register' ? 'contained' : 'outlined'} onClick={this.handleSelectAuthComponent.bind(this, 'register')}>Register</Button>
                 </ButtonGroup>
 
+								{this.state.showSuccessRegisterationMessage ? <p style={{color: 'green'}}>Successfully registered now login</p> : ''}
+
                 {
                     this.state.selectedAuthComponent === 'login' ? <Login login={this.login.bind(this)}/> : <Register register={this.register.bind(this)}/>
                 }
-                
-                
             </div>
         )
     }

@@ -4,7 +4,7 @@ import authReducer from "./containers/auth/reducers"
 
 export default function createReducers(){
     return combineReducers({
-        authReducer,
+        authState: authReducer,
         routing: routerReducer,
     })
 

@@ -5,7 +5,7 @@ export const initialState = {
   loginError: null,
   loginLoader: false,
 
-  registerUser: null,
+  registeredUser: null,
   registerError: null,
   registerLoader: false,
 };
@@ -26,7 +26,7 @@ export default function authReducer(state = initialState, action) {
         return { ...state, registerLoader: true, registerError: null, card: null };
 
     case types.REGISTER_SUCCESS:
-        return { ...state, registerUser: action.payload, registerLoader: false };
+        return { ...state, registeredUser: 'success fully registed, now login', registerLoader: false };
 
     case types.REGISTER_FAILED:
         return { ...state, registerLoader: false, registerError: action.payload };
