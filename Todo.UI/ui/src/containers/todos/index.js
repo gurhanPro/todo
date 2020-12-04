@@ -39,7 +39,17 @@ export class Todos extends Component {
     editTodo(todo){
 		console.log('todo to be edited is: ', todo);
 		this.props.dispatch(actions.editTodoRequest(todo))
-	}
+    }
+    
+    toggleComplete(todo){
+        console.log('todo to be toggled is: ', todo);
+		this.props.dispatch(actions.toggleCompleteForTodoRequest(todo))   
+    }
+
+    deleteTodo(todo){
+        console.log('todo to be toggled is: ', todo);
+		this.props.dispatch(actions.deleteTodoRequest(todo))   
+    }
 
     render() {
 
@@ -54,6 +64,8 @@ export class Todos extends Component {
                                     <List todos={lists} 
                                     addTodo={this.addTodo.bind(this)} 
                                     editTodo={this.editTodo.bind(this)}
+                                    toggleComplete={this.toggleComplete.bind(this)}
+                                    deleteTodo={this.deleteTodo.bind(this)}
                                     />
                                 </Grid>
                     </Grid>

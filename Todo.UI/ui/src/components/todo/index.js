@@ -3,7 +3,9 @@ import CloseIcon from '@material-ui/icons/Close';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import Button from '@material-ui/core/Button';
 import DoneIcon from '@material-ui/icons/Done';
-import { TextField, Grid } from '@material-ui/core';
+import { TextField } from '@material-ui/core';
+import MenuItem from '@material-ui/core/MenuItem';
+import Menu from '@material-ui/core/Menu';
 
 export default class Todo extends Component {
 	constructor(props) {
@@ -17,29 +19,46 @@ export default class Todo extends Component {
 	}
 	showEdit() {
 		const todo = this.props.todo
-		this.setState({ showEdit: true, title: todo.title, description: todo.description, selectedTodo: todo});
+		this.setState({ showEdit: true, title: todo.title, description: todo.description, selectedTodo: todo });
 	}
 
-	edit(){
+	edit() {
 		const { title, description, selectedTodo } = this.state
-		const { id, isComplete} = selectedTodo
+		const { id, isComplete } = selectedTodo
 
-		if(!title || !description || !this.state.selectedTodo){
+		if (!title || !description || !this.state.selectedTodo) {
 			console.log('throw error');
 			return
 		}
 
-		this.props.editTodo({ title, description, id, isComplete})
+		this.props.editTodo({ title, description, id, isComplete })
 		this.resetEdit();
 	}
 
 	resetEdit() {
-		this.setState({ showEdit: false });
+		this.setState({ showEdit: false, anchorEl: null });
 	}
 
-
-	handleEditTodoChange(event){
+	handleEditTodoChange(event) {
 		this.setState({ [event.target.name]: event.target.value })
+	}
+
+	handleMenuOpen(event) {
+		this.setState({ anchorEl: event.currentTarget });
+	};
+
+	handleMenuClose() {
+		this.setState({ anchorEl: null });
+	};
+
+	toggleComplete() {
+		const todo = this.props.todo
+		this.props.toggleComplete(todo)
+	}
+
+	deleteTodo() {
+		const todo = this.props.todo
+		this.props.deleteTodo(todo)
 	}
 
 	render() {
@@ -49,9 +68,25 @@ export default class Todo extends Component {
 				{
 					!this.state.showEdit ?
 						<div style={{ backgroundColor: 'white', margin: '1%', color: '#5C5C5C', padding: '2%', textAlign: 'left' }}>
-							<span style={{ float: 'right' }}><MoreVertIcon onClick={this.showEdit.bind(this)} /></span>
-							<h3 style={{textDecoration: todo.isComplete ? 'line-through' : 'none'}}>title: {todo.title}</h3>
-							<p style={{textDecoration: todo.isComplete ? 'line-through' : 'none'}} >
+							<MoreVertIcon
+								onClick={this.handleMenuOpen.bind(this)}
+								style={{ float: 'right' }}
+							/>
+							<Menu
+								id="simple-menu"
+								anchorEl={this.state.anchorEl}
+								keepMounted
+								open={Boolean(this.state.anchorEl)}
+								onClose={this.handleMenuClose.bind(this)}
+							>
+								<MenuItem onClick={() => this.toggleComplete()}>{todo.isComplete ? 'Un Complete' : 'Complete'}</MenuItem>
+								<MenuItem onClick={() => this.showEdit()}>edit</MenuItem>
+								<MenuItem onClick={() => this.deleteTodo()}>delete</MenuItem>
+							</Menu>
+
+
+							<h3 style={{ textDecoration: todo.isComplete ? 'line-through' : 'none' }}>title: {todo.title}</h3>
+							<p style={{ textDecoration: todo.isComplete ? 'line-through' : 'none' }} >
 								description: {todo.description}
 							</p>
 						</div>
@@ -65,7 +100,7 @@ export default class Todo extends Component {
 								style={{ backgroundColor: '#fff', width: '80%', marginLeft: '1%', float: 'left' }}
 							/>
 
-						<TextField
+							<TextField
 								variant="outlined"
 								name="description"
 								value={this.state.description}

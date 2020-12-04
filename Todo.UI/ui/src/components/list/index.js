@@ -76,7 +76,7 @@ export default class List extends Component {
 				{
 					todos.map((todo, index) => (
 						<Grid item xs={12}>
-							<Todo key={index} todo={todo} editTodo={this.props.editTodo} />
+							<Todo key={index} todo={todo} editTodo={this.props.editTodo} toggleComplete={this.props.toggleComplete}  deleteTodo={this.props.deleteTodo} />
 						</Grid>
 					))
 				}

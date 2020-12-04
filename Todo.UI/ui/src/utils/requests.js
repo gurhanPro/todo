@@ -46,13 +46,13 @@ export function editTodo(todo){
 export function toggleCompleteForTodo(todo){
     const token = getAuthorizationToken();
     axios.defaults.headers.common.Authorization = `Bearer ${token}`;
-    return axios.get(BASE_URL+'todos');
+    return axios.put(`${BASE_URL}todos/${todo.id}/IsComplete`, {Value:!todo.isComplete});
 }
 
 
 export function deleteTodo(todo){
     const token = getAuthorizationToken();
     axios.defaults.headers.common.Authorization = `Bearer ${token}`;
-    return axios.get(BASE_URL+'todos');
+    return axios.delete(`${BASE_URL}todos/${todo.id}`);
 }
 
