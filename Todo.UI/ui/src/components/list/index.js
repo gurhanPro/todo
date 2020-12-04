@@ -30,7 +30,7 @@ export default class List extends Component {
 	}
 
 	resetAddTodoField(){
-		this.setState({ showAddCardField: false, title: ''});
+		this.setState({ showAddCardField: false, title: '', description: '' });
 	}
 
 	addTodo(){
