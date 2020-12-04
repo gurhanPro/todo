@@ -9,6 +9,7 @@ export function* loginRequestWatcher() {
       try {
         const response = yield call(login, payload);
         yield put(actions.loginSuccess(response.data));
+        localStorage.setItem('auth', JSON.stringify(response.data));
       } catch (e) {
         yield put(actions.loginFail(e.response.data));
       }

@@ -21,6 +21,7 @@ export function* getAllTodosRequestWatcher() {
       try {
         const response = yield call(requests.addTodo, payload);
         yield put(actions.addTodoSuccess(response.data));
+        yield put(actions.getAllTodosRequest());
       } catch (e) {
         yield put(actions.addTodoFail(e.response.data));
       }
@@ -34,6 +35,7 @@ export function* getAllTodosRequestWatcher() {
       try {
         const response = yield call(requests.editTodo, payload);
         yield put(actions.editTodoSuccess(response.data));
+        yield put(actions.getAllTodosRequest());
       } catch (e) {
         yield put(actions.editTodoFail(e.response.data));
       }
@@ -46,6 +48,7 @@ export function* getAllTodosRequestWatcher() {
       try {
         const response = yield call(requests.toggleCompleteForTodo, payload);
         yield put(actions.toggleCompleteForTodoSuccess(response.data));
+        yield put(actions.getAllTodosRequest());
       } catch (e) {
         yield put(actions.toggleCompleteForTodoFail(e.response.data));
       }
@@ -58,6 +61,7 @@ export function* getAllTodosRequestWatcher() {
       try {
         const response = yield call(requests.deleteTodo, payload);
         yield put(actions.deleteTodoSuccess(response.data));
+        yield put(actions.getAllTodosRequest());
       } catch (e) {
         yield put(actions.deleteTodoFail(e.response.data));
       }

@@ -1,37 +1,58 @@
 import axios from 'axios';
+import { getAuthorizationToken } from './utils';
+
+const BASE_URL = 'http://localhost:5000/api/';
+
+const crudeInstance = axios.create({
+    baseURL: BASE_URL,
+    headers: {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+    },
+  });
+
 
 export function register(user){
-    console.log('registering: ' , user);
-    
-     return axios.post('http://localhost:5000/api/auth/register', user);
+     return crudeInstance.post('auth/register', user);
 }
 
 export function login(user){
-     return axios.post('http://localhost:5000/api/auth', user);
+     return crudeInstance.post('auth', user);
+}
+
+export function getAllTodos(){
+    const token = getAuthorizationToken();
+    axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+    return axios.get(BASE_URL+'todos');
 }
 
 
-export function getAllTodos(user){
-    return axios.post('http://localhost:5000/api/auth', user);
+export function addTodo(todo){
+    console.log('req: ', todo);
+    
+    const token = getAuthorizationToken();
+    axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+    return axios.post(BASE_URL+'todos', todo);
 }
 
 
-export function addTodo(user){
-    return axios.post('http://localhost:5000/api/auth', user);
+export function editTodo(todo){
+    const token = getAuthorizationToken();
+    axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+    return axios.put(BASE_URL+'todos/'+todo.id, todo);
 }
 
 
-export function editTodo(user){
-    return axios.post('http://localhost:5000/api/auth', user);
+export function toggleCompleteForTodo(todo){
+    const token = getAuthorizationToken();
+    axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+    return axios.get(BASE_URL+'todos');
 }
 
 
-export function toggleCompleteForTodo(user){
-    return axios.post('http://localhost:5000/api/auth', user);
-}
-
-
-export function deleteTodo(user){
-    return axios.post('http://localhost:5000/api/auth', user);
+export function deleteTodo(todo){
+    const token = getAuthorizationToken();
+    axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+    return axios.get(BASE_URL+'todos');
 }
 

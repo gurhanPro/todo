@@ -1,9 +1,8 @@
 import * as types from '../../utils/actionTypes';
 
-export function getAllTodosRequest(user) {
+export function getAllTodosRequest() {
     return {
       type: types.GET_ALL_TODOS_REQUEST,
-      payload: user
     };
   }
   
@@ -21,10 +20,12 @@ export function getAllTodosRequest(user) {
     };
   }
 
-  export function addTodoRequest(user) {
+  export function addTodoRequest(todo) {
+    console.log('actions: ', todo);
+    
     return {
       type: types.ADD_TODO_REQUEST,
-      payload: user
+      payload: todo
     };
   }
   
@@ -42,10 +43,10 @@ export function getAllTodosRequest(user) {
     };
   }
 
-  export function editTodoRequest(user) {
+  export function editTodoRequest(todo) {
     return {
       type: types.EDIT_TODO_REQUEST,
-      payload: user
+      payload: todo
     };
   }
   
@@ -63,10 +64,10 @@ export function getAllTodosRequest(user) {
     };
   }
 
-  export function toggleCompleteForTodoRequest(user) {
+  export function toggleCompleteForTodoRequest(todo) {
     return {
       type: types.TOGGLE_COMPLETE_FOR_TODO_REQUEST,
-      payload: user
+      payload: todo
     };
   }
   
@@ -84,10 +85,10 @@ export function getAllTodosRequest(user) {
     };
   }
 
-  export function deleteTodoRequest(user) {
+  export function deleteTodoRequest(todo) {
     return {
       type: types.DELETE_TODO_REQUEST,
-      payload: user
+      payload: todo
     };
   }
   
