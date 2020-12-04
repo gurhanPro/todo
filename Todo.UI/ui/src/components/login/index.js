@@ -38,6 +38,7 @@ export default class Login extends Component {
 									placeholder = 'email'
 									value={this.state.email}
 									onChange={this.handleFieldChange}
+									id="email"
 							/>
 							<br/>
 							<br/>
@@ -49,10 +50,11 @@ export default class Login extends Component {
 									placeholder = 'password'
 									value={this.state.password}
 									onChange={this.handleFieldChange}
+									id="password"
 							/>
 							<br/>
 							<br/>
-							<Button size="large" style={{backgroundColor:'#d7fc07', color:'black'}} onClick={this.login.bind(this)}>Login</Button>
+							<Button id="loginButton" size="large" style={{backgroundColor:'#d7fc07', color:'black'}} onClick={this.login.bind(this)}>Login</Button>
             </div>
         )
     }

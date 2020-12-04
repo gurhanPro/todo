@@ -85,8 +85,8 @@ export default class Todo extends Component {
 							</Menu>
 
 
-							<h3 style={{ textDecoration: todo.isComplete ? 'line-through' : 'none' }}>title: {todo.title}</h3>
-							<p style={{ textDecoration: todo.isComplete ? 'line-through' : 'none' }} >
+							<h3 id="title" style={{ textDecoration: todo.isComplete ? 'line-through' : 'none' }}>title: {todo.title}</h3>
+							<p id="description" style={{ textDecoration: todo.isComplete ? 'line-through' : 'none' }} >
 								description: {todo.description}
 							</p>
 						</div>
