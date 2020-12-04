@@ -6,7 +6,7 @@ export default class Register extends Component {
 		constructor(props) {
 			super(props)
 			this.state = {
-				username: '',
+				email: '',
 				password: '',
 			}
 
@@ -18,12 +18,14 @@ export default class Register extends Component {
 		}
 
 		register(){
-			const { username, password } = this.state
-			if(!username || !password){
-				console.log('enter username and password');
+			const { email, password } = this.state
+			if(!email || !password){
+				console.log('enter email and password');
 				return
 			}
-			console.log('payload', { username, password } );
+ 
+			console.log('register compnent payload', { email, password } );
+			this.props.register({email, password, role: 'admin' })
 		}
 
     render() {
@@ -32,9 +34,9 @@ export default class Register extends Component {
                 <TextField
 									variant="outlined"
 									fullWidth
-									name="username"
-									placeholder = 'username'
-									value={this.state.username}
+									name="email"
+									placeholder = 'email'
+									value={this.state.email}
 									onChange={this.handleFieldChange}
 							/>
 							<br/>

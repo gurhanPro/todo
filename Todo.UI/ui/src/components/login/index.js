@@ -6,7 +6,7 @@ export default class Login extends Component {
 		constructor(props) {
 			super(props)
 			this.state = {
-				username: '',
+				email: '',
 				password: '',
 			}
 
@@ -18,14 +18,14 @@ export default class Login extends Component {
 		}
 
 		login(){
-			const { username, password } = this.state
-			if(!username || !password){
-				console.log('enter username and password');
+			const { email, password } = this.state
+			if(!email || !password){
+				console.log('enter email and password');
 				return
 			}
  
-			console.log('payload', { username, password } );
-			
+			console.log('payload', { email, password } );
+			this.props.login({email, password })
 		}
 
     render() {
@@ -34,9 +34,9 @@ export default class Login extends Component {
                 <TextField
 									variant="outlined"
 									fullWidth
-									name="username"
-									placeholder = 'username'
-									value={this.state.username}
+									name="email"
+									placeholder = 'email'
+									value={this.state.email}
 									onChange={this.handleFieldChange}
 							/>
 							<br/>

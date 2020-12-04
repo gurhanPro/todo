@@ -6,6 +6,7 @@ import ButtonGroup from '@material-ui/core/ButtonGroup';
 
 import Login from '../../components/login'
 import Register from '../../components/register'
+import * as actions from './actions'
 
 export  class Auth extends Component {
     constructor(props) {
@@ -18,7 +19,17 @@ export  class Auth extends Component {
 
     handleSelectAuthComponent(selectedAuthComponent) {
         this.setState({ selectedAuthComponent })
-    }
+		}
+		login(user){
+			console.log('login: ', user);
+			this.props.dispatch(actions.loginRequest(user))
+		}
+
+		register(user){
+			console.log('register payload: ', user);
+			this.props.dispatch(actions.registerRequest(user))
+		}
+
 
     render() {
         return (
@@ -30,7 +41,7 @@ export  class Auth extends Component {
                 </ButtonGroup>
 
                 {
-                    this.state.selectedAuthComponent === 'login' ? <Login /> : <Register />
+                    this.state.selectedAuthComponent === 'login' ? <Login login={this.login.bind(this)}/> : <Register register={this.register.bind(this)}/>
                 }
                 
                 
@@ -39,4 +50,5 @@ export  class Auth extends Component {
     }
 }
 export default connect(state => ({
+	authData: state.authState,
 }))(Auth);
